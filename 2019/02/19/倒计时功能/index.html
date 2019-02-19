@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>s1mple&#39;s blog</title>
+    <title>倒计时功能 · s1mple&#39;s blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -203,12 +203,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/">S1mple&#39;s blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">倒计时功能</a>
+            </div>
+    </div>
     
     <a class="home-link" href="/">S1mple's blog.</a>
 </header>
@@ -220,24 +231,74 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(https://source.unsplash.com/random)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            倒计时功能
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class="post-intro-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="vue">vue</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">551</span>阅读时长: <span class="post-count reading-time">2 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/02/19</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -338,43 +399,52 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/02/16/第一次上线vue项目到github-pages所遇到的坑/">
-            
-                <span>第一次上线vue项目到github-pages所遇到的坑</span>
-        </a>
-        <div class="abstract-content">
-            项目地址上线vue项目到gh-pages其实很简单，只需要将项目打包好的dist目录上传到仓库的gh-pages上即可12345678# 强制添加dist文件夹，因为.gitignore文件中定...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/02/16</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="vue">vue</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="github">github</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="webpack">webpack</a>
-    
-</div>
-            
-        </div>
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>今天想在前几天做的答题demo中加一个倒计时功能，具体需求是：每道题答题限制时间10秒，当还剩3秒时提示剩余时间信息，时间截止后跳转下一题。</p>
+<h4 id="我的实现"><a href="#我的实现" class="headerlink" title="我的实现"></a>我的实现</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">      &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"countdown"</span> v-<span class="keyword">if</span>=<span class="string">"showCountDown"</span>&gt;还剩&lt;span&gt;&#123;&#123;time&#125;&#125;&lt;<span class="regexp">/span&gt;秒&lt;/</span>div&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; mapState, mapActions &#125; <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      choosedType: <span class="literal">null</span>, <span class="comment">// 选项ABCD</span></span><br><span class="line">      choosedId: <span class="literal">null</span>, <span class="comment">// 选择答案的id</span></span><br><span class="line">      showCountDown: <span class="literal">false</span>, <span class="comment">// 是否显示提示</span></span><br><span class="line">      time: <span class="number">10</span>, <span class="comment">// 倒计时时间</span></span><br><span class="line">      flag: <span class="literal">false</span> <span class="comment">// 是否进行倒计时</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: mapState([</span><br><span class="line">    <span class="string">'itemNum'</span>, <span class="comment">// 当前是第几道题</span></span><br><span class="line">    <span class="string">'itemDetail'</span> <span class="comment">// 题目数据</span></span><br><span class="line">  ]),</span><br><span class="line">  methods: &#123;</span><br><span class="line">    ...mapActions([<span class="string">'nextItem'</span>, <span class="string">'init'</span>]),</span><br><span class="line">    timeDown () &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.time &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.time--</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.time === <span class="number">3</span>) &#123; <span class="comment">// 还剩3秒时显示提示信息</span></span><br><span class="line">        <span class="keyword">this</span>.showCountDown = <span class="literal">true</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.time === <span class="number">0</span>) &#123; <span class="comment">// 计时结束后停止计时，隐藏提示信息</span></span><br><span class="line">        <span class="keyword">this</span>.flag = <span class="literal">true</span></span><br><span class="line">        <span class="keyword">this</span>.showCountDown = <span class="literal">false</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    timer () &#123;</span><br><span class="line">      setInterval(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.flag === <span class="literal">true</span>) &#123;</span><br><span class="line">          clearInterval(<span class="keyword">this</span>.timer)</span><br><span class="line">          <span class="comment">// 如果停止计时时选择了答案并且当前不是最后一道题</span></span><br><span class="line">          <span class="comment">// 则提交数据跳转至下一题并初始化计时数据</span></span><br><span class="line">          <span class="keyword">if</span> (<span class="keyword">this</span>.choosedType != <span class="literal">null</span> &amp;&amp; <span class="keyword">this</span>.itemNum &lt; <span class="keyword">this</span>.itemDetail.length) &#123;</span><br><span class="line">            <span class="keyword">this</span>.choosedType = <span class="literal">null</span></span><br><span class="line">            <span class="keyword">this</span>.nextItem(<span class="keyword">this</span>.choosedId)</span><br><span class="line">            <span class="keyword">this</span>.time = <span class="number">10</span></span><br><span class="line">            <span class="keyword">this</span>.flag = <span class="literal">false</span></span><br><span class="line">          &#125; </span><br><span class="line">          <span class="comment">// 如果停止计时时未选择了答案并且当前不是最后一道题</span></span><br><span class="line">          <span class="comment">// 则当前题记为未选择并初始化计时数据</span></span><br><span class="line">          <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.itemNum &lt; <span class="keyword">this</span>.itemDetail.length) &#123;</span><br><span class="line">            <span class="keyword">this</span>.nextItem(<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">this</span>.time = <span class="number">10</span></span><br><span class="line">            <span class="keyword">this</span>.flag = <span class="literal">false</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.timeDown()</span><br><span class="line">      &#125;, <span class="number">1000</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted () &#123;</span><br><span class="line">    <span class="keyword">this</span>.timer()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="bug点"><a href="#bug点" class="headerlink" title="bug点"></a>bug点</h4><p>具体实现很简单，但最初我将timer的执行放在了updated中，结果出现了bug，timer出现重复执行的情况。只要当数据发生变化，会调用beforeUpdate，然后经过虚拟DOM（Virtual DOM），再调用updated更新页面。当点击选项时，data中的chooseType和chooseId就会变化，会触发updated，所以timer会多次执行。而mounted只会在渲染内容挂载到dom节点时执行一次，所以放在mounted中就没有问题。</p>
+<h4 id="Vue生命周期钩子"><a href="#Vue生命周期钩子" class="headerlink" title="Vue生命周期钩子"></a>Vue生命周期钩子</h4><p><a href="https://cn.vuejs.org/v2/guide/instance.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%9B%BE%E7%A4%BA" target="_blank" rel="noopener">官方图示</a><br><a href="https://zhuanlan.zhihu.com/p/45056082" target="_blank" rel="noopener">如何解释vue的生命周期才能令面试官满意？</a></p>
+
     </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://s1mple.site">Wang jn</a>
+            </p><p>原文链接：<a href="http://s1mple.site/2019/02/19/倒计时功能/">http://s1mple.site/2019/02/19/倒计时功能/</a>
+            </p><p>发表日期：<a href="http://s1mple.site/2019/02/19/倒计时功能/">February 19th 2019, 8:41:42 pm</a>
+            </p><p>更新日期：<a href="http://s1mple.site/2019/02/19/倒计时功能/">February 19th 2019, 9:13:40 pm</a>
+            </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2019/02/16/第一次上线vue项目到github-pages所遇到的坑/" title="第一次上线vue项目到github-pages所遇到的坑">
+                    <div class="prevTitle">第一次上线vue项目到github-pages所遇到的坑</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -456,6 +526,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#我的实现"><span class="toc-number">1.</span> <span class="toc-text">我的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bug点"><span class="toc-number">2.</span> <span class="toc-text">bug点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Vue生命周期钩子"><span class="toc-number">3.</span> <span class="toc-text">Vue生命周期钩子</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -589,6 +677,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
