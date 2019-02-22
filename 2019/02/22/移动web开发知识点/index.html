@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="Wang jn">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Wang jn">
+    
+    <meta name="keywords" content="hexo,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>移动web开发知识点 · s1mple&#39;s blog</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href="/assets/bitbug_favicon.ico">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin="">
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin="">
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/">S1mple&#39;s blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">移动web开发知识点</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href="/">S1mple's blog.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(https://source.unsplash.com/random)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            移动web开发知识点
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class="post-intro-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="mobile-web">mobile-web</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">1.7k</span>阅读时长: <span class="post-count reading-time">7 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/02/22</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="移动端web开发知识点"><a href="#移动端web开发知识点" class="headerlink" title="移动端web开发知识点"></a>移动端web开发知识点</h1><h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><ul>
+<li>跑在手机端的web页面（H5页面）</li>
+<li>跨平台</li>
+<li>基于webview</li>
+<li>告别ie拥抱webkit</li>
+<li>更高的适配和性能要求</li>
+</ul>
+<h2 id="一、移动web基础知识"><a href="#一、移动web基础知识" class="headerlink" title="一、移动web基础知识"></a>一、移动web基础知识</h2><h4 id="1-1-pixel像素基础"><a href="#1-1-pixel像素基础" class="headerlink" title="1.1 pixel像素基础"></a>1.1 <em>pixel像素基础</em></h4><ul>
+<li>px: css pixels 逻辑像素， 浏览器使用的抽象单位</li>
+<li>dp,dt: device independent pixels 设备无关像素</li>
+<li>dpr: devicePixelRatio 设备像素缩放比</li>
+</ul>
+<p>计算公式： <strong>1px = (dpr)^2 * 1dp</strong></p>
+<p>当dpr等于2的情况</p>
+<p><img src="images/pixel.png" alt=""></p>
+<p>平面上： 1px = (2)^2 <em> 1dp<br>维度上： 1px = 2</em> 1dp</p>
+<ul>
+<li>DPI：打印机每英寸可以喷的墨汁点(印刷行业) </li>
+<li>PPI: 屏幕每英寸的像素数量，即单位英寸内的像素密度</li>
+</ul>
+<p>在计算机显示设备参数描述上，二者意思相同</p>
+<p>计算公式：以ipone5为例(1136*640, 4英寸)<br>ppi = √(1136^2 + 640^2) / 4 = 326ppi(视网膜Retina屏) 单位为硬件像素，非px</p>
+<p><img src="images/ppi.png" alt=""></p>
+<p>ppi越高，像素数越高，图像越清晰</p>
+<p><img src="images/dpr.png" alt=""></p>
+<p>retina高清屏的dpr都是大于等于2<br>eg: iphone5的ppi为326大于320，所以iphone5的dpr等于2</p>
+<p><img src="images/iphone5.png" alt=""></p>
+<h4 id="1-2-viewport"><a href="#1-2-viewport" class="headerlink" title="1.2 viewport"></a>1.2 <em>viewport</em></h4><p>layout viewport = document.documentElement.clientWidth(移动设备默认viewport)</p>
+<p>visual viewport = window.innerWidth(浏览器可视区域大小)</p>
+<p>ideal viewport = device-width<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width,initial-scale=1,user-scalable=no"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>最佳实践：layout viewport = visual viewport = device-width</strong></p>
+<ul>
+<li>width: 设置布局viewport的特定值(‘device-width’)</li>
+<li>initial-scale: 设置页面的初始缩放</li>
+<li>minimum-scale: 最少缩放 </li>
+<li>maximum-scale: 最大缩放</li>
+<li>user-scalable: 用户能否缩放</li>
+</ul>
+<p>设计方案</p>
+<ol>
+<li>根据设备的实际宽度来设计（常用）</li>
+<li>initial-scale设为0.5，此时物理像素dp等于抽象像素px，1像素边框和高清图片都不需要额外处理</li>
+</ol>
+<p><strong><a href="http://www.cnblogs.com/2050/p/3877280.html" target="_blank" rel="noopener">移动前端开发之viewport的深入理解</a></strong></p>
+<h2 id="二、常见移动web适配方法"><a href="#二、常见移动web适配方法" class="headerlink" title="二、常见移动web适配方法"></a>二、常见移动web适配方法</h2><ul>
+<li>定高，宽度百分比</li>
+<li><a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="noopener">flex布局</a></li>
+<li>Media Query(媒体查询)</li>
+</ul>
+<h4 id="2-1-Media-Query"><a href="#2-1-Media-Query" class="headerlink" title="2.1 Media Query"></a>2.1 <em>Media Query</em></h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">media</span> 媒体类型 and (媒体特性) &#123;</span><br><span class="line">    <span class="comment">/* css样式 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>媒体类型：screen(屏幕), print(打印机), handheld(手持设备), all(通用)</li>
+<li>媒体特性：max-width, min-width, max-height, min-height, device-width, device-height, orientation:landscape(横向) portrait(纵向)</li>
+</ul>
+<h4 id="2-2-rem"><a href="#2-2-rem" class="headerlink" title="2.2 rem"></a>2.2 <em>rem</em></h4><blockquote>
+<p>font size of the root element</p>
+</blockquote>
+<blockquote>
+<p>1rem = html的font-size</p>
+</blockquote>
+<p>首先以设计稿的屏幕大小设置html的font-size，然后网页各处（元素尺寸、文字大小）根据此font-size来设置大小，使用rem作为单位，<br>随后搭配媒体查询或JS，根据屏幕的大小来动态控制html元素的font-size，当html的font-size改变，其他元素的大小也会跟着改变<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">media</span> screen and (max-width: <span class="number">360px</span>) and (min-width: <span class="number">321px</span>) &#123;</span><br><span class="line">        <span class="selector-tag">html</span> &#123;</span><br><span class="line">            <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">@<span class="keyword">media</span> screen and (max-width: <span class="number">320px</span>) &#123;</span><br><span class="line">    <span class="selector-tag">html</span> &#123;</span><br><span class="line">        <span class="attribute">font-size</span>: <span class="number">24px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> htmlWidth = <span class="built_in">document</span>.documentElement.clientWidth || <span class="built_in">document</span>.body.clientWidth</span><br><span class="line"><span class="keyword">var</span> htmlDom = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'html'</span>)[<span class="number">0</span>]</span><br><span class="line"><span class="comment">// 除以多少自行确定</span></span><br><span class="line">htmlDom.style.fontSize = htmlWidth / <span class="number">10</span> + <span class="string">'px'</span></span><br><span class="line"><span class="comment">// 页面大小改变时，动态改变html的font-size，从而改变页面内容样式</span></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'resize'</span>, ()=&gt; &#123;</span><br><span class="line">    <span class="keyword">var</span> htmlWidth = <span class="built_in">document</span>.documentElement.clientWidth || <span class="built_in">document</span>.body.clientWidth</span><br><span class="line">    htmlDom.style.fontSize = htmlWidth / <span class="number">10</span> + <span class="string">'px'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="三、响应式布局和弹性布局"><a href="#三、响应式布局和弹性布局" class="headerlink" title="三、响应式布局和弹性布局"></a>三、响应式布局和弹性布局</h2><p>响应式布局：一个页面在不同屏幕不同终端上都能显示出令人满意的效果，页面的布局大小和内容在不同屏幕下都有不同样式<br>弹性布局：类似于自适应布局，在不同屏幕宽度下，页面内容大小随之等比例缩放，页面布局内容不发生改变</p>
+<h4 id="3-1-响应式布局设计点"><a href="#3-1-响应式布局设计点" class="headerlink" title="3.1 响应式布局设计点"></a>3.1 响应式布局设计点</h4><ol>
+<li><p>meta设置</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"applicable-device"</span> <span class="attr">content</span>=<span class="string">"pc,mobile"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Cache-Control"</span> <span class="attr">content</span>=<span class="string">"no-transform "</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge,chrome=1"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"HandheldFriendly"</span> <span class="attr">content</span>=<span class="string">"true"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用百分比布局(当没有命中媒体查询时，页面也能正常展示)</p>
+</li>
+<li><p>弹性图片</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#wrapper</span> <span class="selector-tag">img</span> &#123;</span><br><span class="line">    <span class="attribute">max-width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">height</span>: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>图片会根据wrapper的大小来改变宽度，height为auto保证图片不会失真<br>如果为背景图片，可设置图片的background-size属性</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.background-img</span> &#123;</span><br><span class="line">     <span class="attribute">background-img</span>:<span class="built_in">url</span>(img.png);</span><br><span class="line">     <span class="attribute">background-repeat</span>:no-repeat;</span><br><span class="line">     <span class="attribute">background-size</span>:<span class="number">100%</span> <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> background-size是css3的新属性，用于设置背景图片的大小，有两个可选值，第一个值用于指定背景图的width,第2个值用于指定背景图的height,如果只指定一个值，那么另一个值默认为auto。<br> background-size:cover; 等比扩展图片来填满元素<br> background-size:contain; 等比缩小图片来适应元素的尺寸</p>
+</li>
+<li>重新布局，显示与隐藏<ul>
+<li>同比例缩减元素尺寸（百分比，rem，em)</li>
+<li>调整页面结构布局（<em>经常切换位置的元素使用 **</em>绝对定位<em>**，减少重绘提高渲染性能</em></li>
+<li>隐藏冗余的元素</li>
+</ul>
+</li>
+</ol>
+<p><a href="https://www.cnblogs.com/yanayana/p/7066948.html" target="_blank" rel="noopener">静态布局、自适应布局、流式布局、响应式布局、弹性布局等的概念和区别</a></p>
+<p><a href="https://www.cnblogs.com/dreamsboy/p/5656009.html" target="_blank" rel="noopener">响应式布局总结</a></p>
+<h2 id="四、移动web特别样式处理"><a href="#四、移动web特别样式处理" class="headerlink" title="四、移动web特别样式处理"></a>四、移动web特别样式处理</h2><h4 id="4-1-高清图片"><a href="#4-1-高清图片" class="headerlink" title="4.1 高清图片"></a>4.1 高清图片</h4><p>在移动web页面渲染图片，为了避免图片产生模糊，图片的宽高应该用物理像素单位渲染，即100*100的图片<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">width: (100/dpr) px; </span><br><span class="line">height: (100/dpr) px;</span><br></pre></td></tr></table></figure></p>
+<h4 id="4-2-1像素边框"><a href="#4-2-1像素边框" class="headerlink" title="4.2 1像素边框"></a>4.2 1像素边框</h4><p>在retina屏下会模糊，因为设置的1px使用了2dp渲染</p>
+<p><a href="https://segmentfault.com/a/1190000007604842" target="_blank" rel="noopener">解决方法</a>：scale(.5)等</p>
+<h4 id="4-3-多行文本溢出"><a href="#4-3-多行文本溢出" class="headerlink" title="4.3 多行文本溢出"></a>4.3 多行文本溢出</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 单行文本溢出 */</span></span><br><span class="line"><span class="selector-class">.inaline</span> &#123;</span><br><span class="line">   <span class="attribute">overflow</span>: hidden;</span><br><span class="line">   <span class="attribute">white-space</span>: nowrap;</span><br><span class="line">   <span class="attribute">text-overflow</span>: ellipsis;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 多行文本溢出 */</span></span><br><span class="line"><span class="selector-class">.intwoline</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: -webkit-box <span class="meta">!important</span>;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">    <span class="attribute">text-overflow</span>: ellipsis;</span><br><span class="line">    <span class="attribute">word-break</span>: break-all;</span><br><span class="line">    <span class="attribute">-webkit-box-orient</span>: vertical;</span><br><span class="line">    <span class="comment">/* 文本行数 */</span></span><br><span class="line">    <span class="attribute">-webkit-line-clamp</span>: <span class="number">2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="五、移动端交互"><a href="#五、移动端交互" class="headerlink" title="五、移动端交互"></a>五、移动端交互</h2><h4 id="5-1-300ms延迟"><a href="#5-1-300ms延迟" class="headerlink" title="5.1 300ms延迟"></a>5.1 300ms延迟</h4><p>为了确定用户是”单击”还是”双击”，设置300ms延迟来判断</p>
+<p>解决方法：自定义tap事件：在touchstart、touchend时记录时间、手指位置，在touchend时进行比较，如果<br>手指位置为同一位置（或允许移动一个非常小的位移值）且时间间隔较短（一般认为是200ms)，且过程中未曾触发过touchmove，即可认为触发了手持设备的’click’。（会有点透的bug)</p>
+<p><strong>使用zepto.js库或者使用fastClick库</strong></p>
+<h4 id="5-2-touch事件"><a href="#5-2-touch事件" class="headerlink" title="5.2 touch事件"></a>5.2 touch事件</h4><ul>
+<li>touchstart: 手指触摸屏幕触发（已经有手指放屏幕上不会触发）</li>
+<li>touchmove：手指在屏幕滑动，连续触发</li>
+<li>touchend：手指离开屏幕时触发</li>
+<li>touchcancel：系统取消touch时候触发</li>
+</ul>
+<p>触摸事件包含专有的触摸属性</p>
+<ul>
+<li>touches: 跟踪触摸操作的touch对象数组</li>
+<li>targetTouches: 特定事件目标的touch对象数组</li>
+<li>changeTouches: 上次触摸改变的touch对象数组</li>
+</ul>
+<p>每个touch对象包含属性:</p>
+<ul>
+<li>clientX: 触摸目标在视口的x坐标</li>
+<li>clientY: 触摸目标在视口的y坐标</li>
+<li>identifier: 表示触摸的唯一id</li>
+<li>pageX: 触摸目标在页面中的x坐标（包含滚动）</li>
+<li>pageY: 触摸目标在页面中的y坐标（包含滚动）</li>
+<li>screenX: 触摸目标在屏幕中的x坐标</li>
+<li>screenY: 触摸目标在屏幕中的y坐标</li>
+<li>target: 触摸的dom节点目标</li>
+</ul>
+<h4 id="5-3-弹性滚动"><a href="#5-3-弹性滚动" class="headerlink" title="5.3 弹性滚动"></a>5.3 弹性滚动</h4><p>局部滚动开启弹性滚动<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">overflow</span>: scroll;</span><br><span class="line">    <span class="attribute">-webkit-overflow-scrolling</span>: touch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>android不支持原生弹性滚动，可使用iscroll或Better-scroll库</p>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://s1mple.site">Wang jn</a>
+            </p><p>原文链接：<a href="http://s1mple.site/2019/02/22/移动web开发知识点/">http://s1mple.site/2019/02/22/移动web开发知识点/</a>
+            </p><p>发表日期：<a href="http://s1mple.site/2019/02/22/移动web开发知识点/">February 22nd 2019, 9:23:56 pm</a>
+            </p><p>更新日期：<a href="http://s1mple.site/2019/02/22/移动web开发知识点/">February 22nd 2019, 9:27:29 pm</a>
+            </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2019/02/20/远离ie/" title="远离ie">
+                    <div class="prevTitle">远离ie</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:459605823@qq.com" class="iconfont-archer email" title="email"></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/459605823" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://www.zhihu.com/people/beast-60-46/activities" class="iconfont-archer zhihu" target="_blank" title="zhihu"></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#移动端web开发知识点"><span class="toc-number">1.</span> <span class="toc-text">移动端web开发知识点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#综述"><span class="toc-number">1.1.</span> <span class="toc-text">综述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、移动web基础知识"><span class="toc-number">1.2.</span> <span class="toc-text">一、移动web基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-pixel像素基础"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">1.1 pixel像素基础</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-viewport"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">1.2 viewport</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、常见移动web适配方法"><span class="toc-number">1.3.</span> <span class="toc-text">二、常见移动web适配方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-Media-Query"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">2.1 Media Query</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-rem"><span class="toc-number">1.3.0.2.</span> <span class="toc-text">2.2 rem</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、响应式布局和弹性布局"><span class="toc-number">1.4.</span> <span class="toc-text">三、响应式布局和弹性布局</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-响应式布局设计点"><span class="toc-number">1.4.0.1.</span> <span class="toc-text">3.1 响应式布局设计点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、移动web特别样式处理"><span class="toc-number">1.5.</span> <span class="toc-text">四、移动web特别样式处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-高清图片"><span class="toc-number">1.5.0.1.</span> <span class="toc-text">4.1 高清图片</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-1像素边框"><span class="toc-number">1.5.0.2.</span> <span class="toc-text">4.2 1像素边框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-多行文本溢出"><span class="toc-number">1.5.0.3.</span> <span class="toc-text">4.3 多行文本溢出</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、移动端交互"><span class="toc-number">1.6.</span> <span class="toc-text">五、移动端交互</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-300ms延迟"><span class="toc-number">1.6.0.1.</span> <span class="toc-text">5.1 300ms延迟</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-touch事件"><span class="toc-number">1.6.0.2.</span> <span class="toc-text">5.2 touch事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-3-弹性滚动"><span class="toc-number">1.6.0.3.</span> <span class="toc-text">5.3 弹性滚动</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 4
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/22</span><a class="archive-post-title" href="/2019/02/22/移动web开发知识点/">移动web开发知识点</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/20</span><a class="archive-post-title" href="/2019/02/20/远离ie/">远离ie</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/19</span><a class="archive-post-title" href="/2019/02/19/倒计时功能/">倒计时功能</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/16</span><a class="archive-post-title" href="/2019/02/16/第一次上线vue项目到github-pages所遇到的坑/">第一次上线vue项目到github-pages所遇到的坑</a>
+        </li>
+    
+    </ul></div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="vue"><span class="iconfont-archer">&#xe606;</span>vue</span>
+    
+        <span class="sidebar-tag-name" data-tags="mobile-web"><span class="iconfont-archer">&#xe606;</span>mobile-web</span>
+    
+        <span class="sidebar-tag-name" data-tags="github"><span class="iconfont-archer">&#xe606;</span>github</span>
+    
+        <span class="sidebar-tag-name" data-tags="webpack"><span class="iconfont-archer">&#xe606;</span>webpack</span>
+    
+        <span class="sidebar-tag-name" data-tags="js"><span class="iconfont-archer">&#xe606;</span>js</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br>
+    1、请确保node版本大于6.2<br>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="front-end"><span class="iconfont-archer">&#xe60a;</span>front-end</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Wang jn"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
