@@ -272,7 +272,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">1.7k</span>阅读时长: <span class="post-count reading-time">7 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">2k</span>阅读时长: <span class="post-count reading-time">7 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -500,10 +500,24 @@ height:50vh;
 </ul>
 <p>触摸事件包含专有的触摸属性</p>
 <ul>
-<li>touches: 跟踪触摸操作的touch对象数组</li>
-<li>targetTouches: 特定事件目标的touch对象数组</li>
-<li>changeTouches: 上次触摸改变的touch对象数组</li>
+<li>touches: 当前屏幕所有触摸点的列表</li>
+<li>targetTouches: 当前对象所有触摸点的列表</li>
+<li>changeTouches: 引发当前事件所有触摸点的列表</li>
 </ul>
+<ol>
+<li><p>用一个手指接触屏幕，触发事件，此时这三个属性有相同的值。</p>
+</li>
+<li><p>用第二个手指接触屏幕，此时，touches有两个元素，每个手指触摸点为一个值。当两个手指触摸相同元素时，<br>targetTouches和touches的值相同，否则targetTouches 只有一个值。changedTouches此时只有一个值，<br>为第二个手指的触摸点，因为第二个手指是引发事件的原因</p>
+</li>
+<li><p>用两个手指同时接触屏幕，此时changedTouches有两个值，每一个手指的触摸点都有一个值</p>
+</li>
+<li><p>手指滑动时，三个值都会发生变化</p>
+</li>
+<li><p>一个手指离开屏幕，touches和targetTouches中对应的元素会同时移除，而changedTouches仍然会存在元素。</p>
+</li>
+<li><p>手指都离开屏幕之后，touches和targetTouches中将不会再有值，changedTouches还会有一个值，<br>此值为最后一个离开屏幕的手指的接触点。</p>
+</li>
+</ol>
 <p>每个touch对象包含属性:</p>
 <ul>
 <li>clientX: 触摸目标在视口的x坐标</li>
@@ -525,7 +539,7 @@ height:50vh;
             <p>原文作者：<a href="http://s1mple.site">Wang jn</a>
             </p><p>原文链接：<a href="http://s1mple.site/2019/02/22/移动web开发知识点/">http://s1mple.site/2019/02/22/移动web开发知识点/</a>
             </p><p>发表日期：<a href="http://s1mple.site/2019/02/22/移动web开发知识点/">February 22nd 2019, 9:23:56 pm</a>
-            </p><p>更新日期：<a href="http://s1mple.site/2019/02/22/移动web开发知识点/">February 22nd 2019, 9:31:50 pm</a>
+            </p><p>更新日期：<a href="http://s1mple.site/2019/02/22/移动web开发知识点/">February 23rd 2019, 10:41:06 am</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -744,9 +758,9 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="vue"><span class="iconfont-archer">&#xe606;</span>vue</span>
-    
         <span class="sidebar-tag-name" data-tags="mobile-web"><span class="iconfont-archer">&#xe606;</span>mobile-web</span>
+    
+        <span class="sidebar-tag-name" data-tags="vue"><span class="iconfont-archer">&#xe606;</span>vue</span>
     
         <span class="sidebar-tag-name" data-tags="github"><span class="iconfont-archer">&#xe606;</span>github</span>
     
