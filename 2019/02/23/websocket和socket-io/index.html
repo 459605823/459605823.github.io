@@ -437,7 +437,7 @@ height:50vh;
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> httpServer = <span class="built_in">require</span>(<span class="string">'http'</span>).createServer();</span><br><span class="line"><span class="keyword">var</span> io = <span class="built_in">require</span>(<span class="string">'socket.io'</span>)(httpServer);</span><br><span class="line">httpServer.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>客户端：当服务端和客户端连接成功时，服务端会监听到connection和connect事件，客户端会监听到connect事件，断开连接时服务端对应到客户端的socket与客户端均会监听到disconcect事件</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"/socket.io/socket.io.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;script&gt;</span><br><span class="line"> <span class="keyword">var</span> socket = io(<span class="string">'http://localhost'</span>);</span><br><span class="line"> socket.on(<span class="string">'news'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(data);</span><br><span class="line">     <span class="comment">// 用户可自行定义事件名</span></span><br><span class="line">     socket.emit(<span class="string">'my other event'</span>, &#123; <span class="attr">my</span>: <span class="string">'data'</span> &#125;);</span><br><span class="line"> &#125;);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"/socket.io/socket.io.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line"> <span class="keyword">var</span> socket = io(<span class="string">'http://localhost'</span>);</span><br><span class="line"> socket.on(<span class="string">'news'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(data);</span><br><span class="line">     <span class="comment">// 用户可自行定义事件名</span></span><br><span class="line">     socket.emit(<span class="string">'my other event'</span>, &#123; <span class="attr">my</span>: <span class="string">'data'</span> &#125;);</span><br><span class="line"> &#125;);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>传输数据：服务端和客户端的socket是一个关联的EventEmitter对象，客户端socket派发的事件可以通过被服务端的socket接收，服务端socket派发的事件也可以被客户端接收。基于这种机制，可以实现双向交流。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 客户端</span></span><br><span class="line"><span class="keyword">var</span> socket = io(<span class="string">'http://localhost'</span>);</span><br><span class="line"><span class="comment">// 监听news事件</span></span><br><span class="line">socket.on(<span class="string">'news'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(data);</span><br><span class="line"><span class="comment">// 触发自定义事件并传递数据</span></span><br><span class="line">socket.emit(<span class="string">'my other event'</span>, &#123; <span class="attr">my</span>: <span class="string">'data'</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 服务器端</span></span><br><span class="line">io.on(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">socket</span>) </span>&#123;</span><br><span class="line"><span class="comment">// 触发new事件并传递数据</span></span><br><span class="line">socket.emit(<span class="string">'news'</span>, &#123; <span class="attr">hello</span>: <span class="string">'world'</span> &#125;);</span><br><span class="line"><span class="comment">// 监听自定义事件</span></span><br><span class="line">socket.on(<span class="string">'my other event'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">   &#125;);</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
@@ -674,10 +674,9 @@ top:50vh;
     
     
     
-    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 6
+        Total : 7
         </div>
         <!-- search  -->
         
@@ -690,6 +689,11 @@ top:50vh;
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/26</span><a class="archive-post-title" href="/2019/02/26/模块化与组件封装/">模块化与组件封装</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -726,17 +730,17 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="vue"><span class="iconfont-archer">&#xe606;</span>vue</span>
+        <span class="sidebar-tag-name" data-tags="websocket"><span class="iconfont-archer">&#xe606;</span>websocket</span>
     
         <span class="sidebar-tag-name" data-tags="mobile-web"><span class="iconfont-archer">&#xe606;</span>mobile-web</span>
+    
+        <span class="sidebar-tag-name" data-tags="js"><span class="iconfont-archer">&#xe606;</span>js</span>
+    
+        <span class="sidebar-tag-name" data-tags="vue"><span class="iconfont-archer">&#xe606;</span>vue</span>
     
         <span class="sidebar-tag-name" data-tags="github"><span class="iconfont-archer">&#xe606;</span>github</span>
     
         <span class="sidebar-tag-name" data-tags="webpack"><span class="iconfont-archer">&#xe606;</span>webpack</span>
-    
-        <span class="sidebar-tag-name" data-tags="js"><span class="iconfont-archer">&#xe606;</span>js</span>
-    
-        <span class="sidebar-tag-name" data-tags="websocket"><span class="iconfont-archer">&#xe606;</span>websocket</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
