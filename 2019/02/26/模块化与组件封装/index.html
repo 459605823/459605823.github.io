@@ -272,7 +272,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">883</span>阅读时长: <span class="post-count reading-time">3 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">998</span>阅读时长: <span class="post-count reading-time">4 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -432,7 +432,16 @@ height:50vh;
 <h2 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a>CommonJS</h2><p>CommonJs是node.js中的模块语法，浏览器中使用需要用到 Browserify 解析</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    a: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// or</span></span><br><span class="line">exports.a = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// b.js</span></span><br><span class="line"><span class="keyword">var</span> <span class="built_in">module</span> = <span class="built_in">require</span>(<span class="string">'./a.js'</span>)</span><br><span class="line"><span class="built_in">module</span>.a <span class="comment">// -&gt; log 1</span></span><br></pre></td></tr></table></figure>
 <h2 id="ES6中的模块"><a href="#ES6中的模块" class="headerlink" title="ES6中的模块"></a>ES6中的模块</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// file a.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="comment">// file b.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;a, b&#125; <span class="keyword">from</span> <span class="string">'./a.js'</span></span><br><span class="line"><span class="keyword">import</span> XXX <span class="keyword">from</span> <span class="string">'./b.js'</span></span><br></pre></td></tr></table></figure>
-<p>commonJS在导出时都是值拷贝，就算导出的值变了，导入的值也不会改变，所以如果想更新值，必须重新导入一次。但是ES6采用实时绑定的方式，导入导出的值都指向同一个内存地址，所以导入值会跟随导出值变化</p>
+<ul>
+<li><p>前者支持动态导入，也就是 require(${path}/xx.js)，后者目前不支持，但是已有提案</p>
+</li>
+<li><p>前者是同步导入，因为用于服务端，文件都在本地，同步导入即使卡住主线程影响也不大。而后者是异步导入，因为用于浏览器，需要下载文件，如果也采用同步导入会对渲染有很大影响</p>
+</li>
+<li><p>commonJS在导出时都是值拷贝，就算导出的值变了，导入的值也不会改变，所以如果想更新值，必须重新导入一次。但是ES6采用实时绑定的方式，导入导出的值都指向同一个内存地址，所以导入值会跟随导出值变化</p>
+</li>
+<li><p>后者会编译成 require/exports 来执行的</p>
+</li>
+</ul>
 
     </article>
     <!-- license  -->
@@ -441,7 +450,7 @@ height:50vh;
             <p>原文作者：<a href="http://s1mple.site">Wang jn</a>
             </p><p>原文链接：<a href="http://s1mple.site/2019/02/26/模块化与组件封装/">http://s1mple.site/2019/02/26/模块化与组件封装/</a>
             </p><p>发表日期：<a href="http://s1mple.site/2019/02/26/模块化与组件封装/">February 26th 2019, 5:00:03 pm</a>
-            </p><p>更新日期：<a href="http://s1mple.site/2019/02/26/模块化与组件封装/">February 26th 2019, 6:13:32 pm</a>
+            </p><p>更新日期：<a href="http://s1mple.site/2019/02/26/模块化与组件封装/">March 3rd 2019, 4:37:21 pm</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -588,6 +597,10 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
     
     
     
