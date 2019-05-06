@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>vue组件间的数据传递 · s1mple&#39;s blog</title>
+    <title>客户端渲染与服务端渲染 · s1mple&#39;s blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/">Sail_</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">vue组件间的数据传递</a>
+                <a href="#" class="post-name">客户端渲染与服务端渲染</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            vue组件间的数据传递
+            客户端渲染与服务端渲染
             <!-- 404 -->
             
         </h1>
@@ -266,18 +266,18 @@ height:50vh;
                 
                     <div class="post-intro-tags">
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="vue">vue</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="js">js</a>
     
 </div>
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">432</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">1k</span>阅读时长: <span class="post-count reading-time">3 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2019/02/27</span>
+                    <span class="post-intro-time">2019/05/06</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -401,31 +401,65 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h2 id="父子组件间的数据传递"><a href="#父子组件间的数据传递" class="headerlink" title="父子组件间的数据传递"></a>父子组件间的数据传递</h2><p><strong>父组件通过prop向子组件传递数据</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//html</span></span><br><span class="line">&lt;div id=<span class="string">"parent"</span>&gt;</span><br><span class="line">   &lt;child :data=<span class="string">"data"</span>&gt;&lt;/child&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">var parent = new Vue(&#123;</span></span><br><span class="line"><span class="regexp">    el: "#parent",</span></span><br><span class="line"><span class="regexp">    data : &#123;</span></span><br><span class="line"><span class="regexp">        /</span><span class="regexp">/ somedata</span></span><br><span class="line"><span class="regexp">    &#125;,</span></span><br><span class="line"><span class="regexp">    components: &#123;</span></span><br><span class="line"><span class="regexp">        "child" : &#123;</span></span><br><span class="line"><span class="regexp">        /</span><span class="regexp">/ 父组件通过属性v-bind向子组件传值</span></span><br><span class="line"><span class="regexp">        /</span><span class="regexp">/ props表示子组件从父组件接收的值</span></span><br><span class="line"><span class="regexp">            props: ['data'],</span></span><br><span class="line"><span class="regexp">            data () &#123;</span></span><br><span class="line"><span class="regexp">                return &#123;</span></span><br><span class="line"><span class="regexp">                    data: this.data</span></span><br><span class="line"><span class="regexp">                &#125;</span></span><br><span class="line"><span class="regexp">            &#125;,</span></span><br><span class="line"><span class="regexp">            template: '&lt;div&gt;&#123;&#123;data&#125;&#125;&lt;/</span>div&gt;<span class="string">'</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;)</span></span><br></pre></td></tr></table></figure>
-<p>所有的 prop 都使得其父子 prop 之间形成了一个单向下行绑定：父级 prop 的更新会向下流动到子组件中，但是反过来则不行</p>
-<p>每次父级组件发生更新时，子组件中所有的 prop 都将会刷新为最新的值</p>
-<p>子组件可以将props作为本地的data来使用</p>
-<p><strong>子组件通过事件向父组件传值（发布订阅模式）</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子组件</span></span><br><span class="line">childClick () &#123;</span><br><span class="line">    <span class="comment">// 子组件触发自定义事件并传递数据</span></span><br><span class="line">    <span class="keyword">this</span>.$emit(<span class="string">'change'</span>, value)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 父组件</span></span><br><span class="line"><span class="comment">// 父组件订阅子组件发布的自定义事件，当事件触发就执行相关方法</span></span><br><span class="line">&lt;child data=<span class="string">"data"</span> @change=<span class="string">"handleChange"</span>&gt;&lt;/child&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="兄弟组件间的数据传递"><a href="#兄弟组件间的数据传递" class="headerlink" title="兄弟组件间的数据传递"></a>兄弟组件间的数据传递</h2><ol>
-<li><p><a href="https://vuex.vuejs.org/zh/" target="_blank" rel="noopener">vuex</a></p>
+        <h2 id="服务端渲染-SSR"><a href="#服务端渲染-SSR" class="headerlink" title="服务端渲染(SSR)"></a>服务端渲染(SSR)</h2><p>服务端在返回html之前，就将数据填充完毕，返回完整的html页面给客户端，客户端只需要进行html的解析即可，此时客户端只需要向服务端发送一次请求，所以首屏速度较快。</p>
+<h2 id="服务端渲染-CSR"><a href="#服务端渲染-CSR" class="headerlink" title="服务端渲染(CSR)"></a>服务端渲染(CSR)</h2><p>html 仅仅作为静态文件，客户端端在请求时，服务端不做任何处理，直接以原文件的形式返回给客户端客户端，然后根据 html 上的 JavaScript，生成 DOM 插入 html。所以在首屏时不仅需要请求html，还需要异步发送ajax请求和其他请求，等待js执行结束后页面才会渲染完成，因此首屏速度较慢。</p>
+<h2 id="异同"><a href="#异同" class="headerlink" title="异同"></a>异同</h2><ul>
+<li><p>渲染本质一样，都是字符串拼接，将数据渲染进一些固定格式的html代码中形成最终的html展示在用户页面上。如果是在服务器端完成的，然后返回给客户端，就是服务器端渲染，而如果是前端做了更多的工作完成了html的拼接，则就是客户端渲染。</p>
 </li>
-<li><p>总线bus</p>
+<li><p>拼接字符串必然引起性能的消耗。服务端渲染性能消耗在服务端，当用户量比较多时，缓存部分数据以避免过多数据重复渲染。客户端渲染，如当下火热的 spa 框架，Angular、React、Vue，在首次渲染时，大多是将原 html 中的数据标记（如  ）替换。客户端渲染较难的一点是数据更新以后，页面响应式更新时如何节省资源，直接 DOM 的读写，是很消耗性能的。 Vue 2.0 + 有 Vnode，进行 diff 后，渲染到页面上。</p>
 </li>
-</ol>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">child</span> <span class="attr">:content</span>=<span class="string">"大哥"</span>&gt;</span><span class="tag">&lt;/<span class="name">child</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">child</span> <span class="attr">:content</span>=<span class="string">"二哥"</span>&gt;</span><span class="tag">&lt;/<span class="name">child</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Vue.prototype.bus = <span class="keyword">new</span> Vue()</span><br><span class="line"></span><br><span class="line">Vue.component(<span class="string">'child'</span>, &#123;</span><br><span class="line">  props: [<span class="string">'content'</span>],</span><br><span class="line">  data () &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">          selfConten: <span class="keyword">this</span>.content</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    handleClick () &#123; <span class="comment">// 触发事件</span></span><br><span class="line">        <span class="keyword">this</span>.bus.$emit(<span class="string">'change'</span>, <span class="keyword">this</span>.selfContent)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  template: <span class="string">'&lt;div @click="handleClick"&gt;&#123;&#123;selfContent&#125;&#125;&lt;/div&gt;,</span></span><br><span class="line"><span class="string">  mounted () &#123;</span></span><br><span class="line"><span class="string">      var self = this</span></span><br><span class="line"><span class="string">      this.bus.$on('</span>change<span class="string">', function(data)&#123; // 订阅事件</span></span><br><span class="line"><span class="string">          self.selfContent = data</span></span><br><span class="line"><span class="string">      &#125;)</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;)</span></span><br></pre></td></tr></table></figure>
-<p>一个组件通过<code>this.bus.$emit</code>触发事件并传出数据<br>其他组件可以通过<code>this.bus.$on</code>订阅事件并接收数据</p>
+</ul>
+<h2 id="利弊"><a href="#利弊" class="headerlink" title="利弊"></a>利弊</h2><h4 id="服务端渲染"><a href="#服务端渲染" class="headerlink" title="服务端渲染"></a>服务端渲染</h4><ul>
+<li><p>优点</p>
+<ul>
+<li><p>首屏渲染快。因为后端拼接完了html，浏览器只需要直接渲染出来。</p>
+</li>
+<li><p>有利于SEO。因为在后端有完整的html页面，所以爬虫更容易爬取获得信息，更有利于seo。</p>
+</li>
+<li><p>无需占用客户端资源。即解析模板的工作完全交由后端来做，客户端只要解析标准的html页面即可，这样对于客户端的资源占用更少，尤其是移动端，也可以更省电。</p>
+</li>
+<li><p>后端生成静态化文件。即生成缓存片段，这样就可以减少数据库查询浪费的时间了，且对于数据变化不大的页面非常高效 </p>
+</li>
+</ul>
+</li>
+<li><p>缺点</p>
+<ul>
+<li><p>不利于前后端分离，开发效率低。使用服务器端渲染，则无法进行分工合作，则对于前端复杂度高的项目，不利于项目高效开发。另外，如果是服务器端渲染，则前端一般就是写一个静态html文件，然后后端再修改为模板，这样是非常低效的，并且还常常需要前后端共同完成修改的动作； 或者是前端直接完成html模板，然后交由后端。另外，如果后端改了模板，前端还需要根据改动的模板再调节css，这样使得前后端联调的时间增加。</p>
+</li>
+<li><p>占用服务器端资源。即服务器端完成html模板的解析，如果请求较多，会对服务器造成一定的访问压力。而如果使用前端渲染，就是把这些解析的压力分摊了前端，而这里确实完全交给了一个服务器。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="客户端渲染"><a href="#客户端渲染" class="headerlink" title="客户端渲染"></a>客户端渲染</h4><ul>
+<li><p>优点</p>
+<ul>
+<li><p>前后端分离。前端专注于前端UI，后端专注于api开发，且前端有更多的选择性，而不需要遵循后端特定的模板。</p>
+</li>
+<li><p>局部刷新，无需每次请求都请求完整页面，用户体验更好</p>
+</li>
+<li><p>节省服务器性能，部署简单</p>
+</li>
+</ul>
+</li>
+<li><p>缺点</p>
+<ul>
+<li><p>首屏速度慢，前端还要进行拼接字符串的过程，需要耗费额外的时间，不如服务器端渲染速度快。</p>
+</li>
+<li><p>不利于seo，爬虫爬取不到完整页面代码。</p>
+</li>
+</ul>
+</li>
+</ul>
 
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>原文作者：<a href="http://s1mple.site">Wang jn</a>
-            </p><p>原文链接：<a href="http://s1mple.site/2019/02/27/vue组件间的数据传递/">http://s1mple.site/2019/02/27/vue组件间的数据传递/</a>
-            </p><p>发表日期：<a href="http://s1mple.site/2019/02/27/vue组件间的数据传递/">February 27th 2019, 10:24:11 am</a>
-            </p><p>更新日期：<a href="http://s1mple.site/2019/02/27/vue组件间的数据传递/">February 27th 2019, 11:15:34 am</a>
+            </p><p>原文链接：<a href="http://s1mple.site/2019/05/06/客户端渲染与服务端渲染/">http://s1mple.site/2019/05/06/客户端渲染与服务端渲染/</a>
+            </p><p>发表日期：<a href="http://s1mple.site/2019/05/06/客户端渲染与服务端渲染/">May 6th 2019, 9:24:01 am</a>
+            </p><p>更新日期：<a href="http://s1mple.site/2019/05/06/客户端渲染与服务端渲染/">May 6th 2019, 9:38:41 am</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -433,17 +467,12 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href="/2019/02/27/js中的对象属性保护/" title="js中的对象属性保护">
-                    <div class="nextTitle">js中的对象属性保护</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2019/02/26/模块化与组件封装/" title="模块化与组件封装">
-                    <div class="prevTitle">模块化与组件封装</div>
+                <a href="/2019/03/24/移动端遮罩层滚动穿透问题/" title="移动端遮罩层滚动穿透问题">
+                    <div class="prevTitle">移动端遮罩层滚动穿透问题</div>
                 </a>
             
         </li>
@@ -559,7 +588,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#父子组件间的数据传递"><span class="toc-number">1.</span> <span class="toc-text">父子组件间的数据传递</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#兄弟组件间的数据传递"><span class="toc-number">2.</span> <span class="toc-text">兄弟组件间的数据传递</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#服务端渲染-SSR"><span class="toc-number">1.</span> <span class="toc-text">服务端渲染(SSR)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务端渲染-CSR"><span class="toc-number">2.</span> <span class="toc-text">服务端渲染(CSR)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异同"><span class="toc-number">3.</span> <span class="toc-text">异同</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#利弊"><span class="toc-number">4.</span> <span class="toc-text">利弊</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#服务端渲染"><span class="toc-number">4.0.1.</span> <span class="toc-text">服务端渲染</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#客户端渲染"><span class="toc-number">4.0.2.</span> <span class="toc-text">客户端渲染</span></a></li></ol></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
