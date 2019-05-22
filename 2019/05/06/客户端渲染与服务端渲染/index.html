@@ -402,7 +402,7 @@ height:50vh;
             <main class="main post-page">
     <article class="article-entry">
         <h2 id="服务端渲染-SSR"><a href="#服务端渲染-SSR" class="headerlink" title="服务端渲染(SSR)"></a>服务端渲染(SSR)</h2><p>服务端在返回html之前，就将数据填充完毕，返回完整的html页面给客户端，客户端只需要进行html的解析即可，此时客户端只需要向服务端发送一次请求，所以首屏速度较快。</p>
-<h2 id="服务端渲染-CSR"><a href="#服务端渲染-CSR" class="headerlink" title="服务端渲染(CSR)"></a>服务端渲染(CSR)</h2><p>html 仅仅作为静态文件，客户端端在请求时，服务端不做任何处理，直接以原文件的形式返回给客户端客户端，然后根据 html 上的 JavaScript，生成 DOM 插入 html。所以在首屏时不仅需要请求html，还需要异步发送ajax请求和其他请求，等待js执行结束后页面才会渲染完成，因此首屏速度较慢。</p>
+<h2 id="客户端渲染-CSR"><a href="#客户端渲染-CSR" class="headerlink" title="客户端渲染(CSR)"></a>客户端渲染(CSR)</h2><p>html 仅仅作为静态文件，客户端端在请求时，服务端不做任何处理，直接以原文件的形式返回给客户端客户端，然后根据 html 上的 JavaScript，生成 DOM 插入 html。所以在首屏时不仅需要请求html，还需要异步发送ajax请求和其他请求，等待js执行结束后页面才会渲染完成，因此首屏速度较慢。</p>
 <h2 id="异同"><a href="#异同" class="headerlink" title="异同"></a>异同</h2><ul>
 <li><p>渲染本质一样，都是字符串拼接，将数据渲染进一些固定格式的html代码中形成最终的html展示在用户页面上。如果是在服务器端完成的，然后返回给客户端，就是服务器端渲染，而如果是前端做了更多的工作完成了html的拼接，则就是客户端渲染。</p>
 </li>
@@ -459,7 +459,7 @@ height:50vh;
             <p>原文作者：<a href="http://s1mple.site">Wang jn</a>
             </p><p>原文链接：<a href="http://s1mple.site/2019/05/06/客户端渲染与服务端渲染/">http://s1mple.site/2019/05/06/客户端渲染与服务端渲染/</a>
             </p><p>发表日期：<a href="http://s1mple.site/2019/05/06/客户端渲染与服务端渲染/">May 6th 2019, 9:24:01 am</a>
-            </p><p>更新日期：<a href="http://s1mple.site/2019/05/06/客户端渲染与服务端渲染/">May 6th 2019, 9:38:41 am</a>
+            </p><p>更新日期：<a href="http://s1mple.site/2019/05/06/客户端渲染与服务端渲染/">May 22nd 2019, 11:23:25 am</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -593,7 +593,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#服务端渲染-SSR"><span class="toc-number">1.</span> <span class="toc-text">服务端渲染(SSR)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务端渲染-CSR"><span class="toc-number">2.</span> <span class="toc-text">服务端渲染(CSR)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异同"><span class="toc-number">3.</span> <span class="toc-text">异同</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#利弊"><span class="toc-number">4.</span> <span class="toc-text">利弊</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#服务端渲染"><span class="toc-number">4.0.1.</span> <span class="toc-text">服务端渲染</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#客户端渲染"><span class="toc-number">4.0.2.</span> <span class="toc-text">客户端渲染</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#服务端渲染-SSR"><span class="toc-number">1.</span> <span class="toc-text">服务端渲染(SSR)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#客户端渲染-CSR"><span class="toc-number">2.</span> <span class="toc-text">客户端渲染(CSR)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异同"><span class="toc-number">3.</span> <span class="toc-text">异同</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#利弊"><span class="toc-number">4.</span> <span class="toc-text">利弊</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#服务端渲染"><span class="toc-number">4.0.1.</span> <span class="toc-text">服务端渲染</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#客户端渲染"><span class="toc-number">4.0.2.</span> <span class="toc-text">客户端渲染</span></a></li></ol></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -606,12 +606,6 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
-    
-    
-    
-    
-    
-    
     
     
     
@@ -845,12 +839,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">03/04</span><a class="archive-post-title" href="/2019/03/04/函数提升与变量提升总结/">函数提升与变量提升总结</a>
+            <span class="archive-post-date">03/04</span><a class="archive-post-title" href="/2019/03/04/一道面试题/">一道面试题</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">03/04</span><a class="archive-post-title" href="/2019/03/04/一道面试题/">一道面试题</a>
+            <span class="archive-post-date">03/04</span><a class="archive-post-title" href="/2019/03/04/函数提升与变量提升总结/">函数提升与变量提升总结</a>
         </li>
     
     
@@ -905,15 +899,15 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="js"><span class="iconfont-archer">&#xe606;</span>js</span>
     
-        <span class="sidebar-tag-name" data-tags="vue"><span class="iconfont-archer">&#xe606;</span>vue</span>
+        <span class="sidebar-tag-name" data-tags="nodejs"><span class="iconfont-archer">&#xe606;</span>nodejs</span>
     
         <span class="sidebar-tag-name" data-tags="websocket"><span class="iconfont-archer">&#xe606;</span>websocket</span>
+    
+        <span class="sidebar-tag-name" data-tags="vue"><span class="iconfont-archer">&#xe606;</span>vue</span>
     
         <span class="sidebar-tag-name" data-tags="github"><span class="iconfont-archer">&#xe606;</span>github</span>
     
         <span class="sidebar-tag-name" data-tags="webpack"><span class="iconfont-archer">&#xe606;</span>webpack</span>
-    
-        <span class="sidebar-tag-name" data-tags="nodejs"><span class="iconfont-archer">&#xe606;</span>nodejs</span>
     
         <span class="sidebar-tag-name" data-tags="mobile-web"><span class="iconfont-archer">&#xe606;</span>mobile-web</span>
     
